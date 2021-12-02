@@ -164,7 +164,11 @@ namespace FileUtilities.Controls
 
         private void btnEditEIs_Click(object sender, EventArgs e)
         {
-            EquipmentInstancesForm form = new EquipmentInstancesForm(EINames);
+            EquipmentInstancesForm form = new EquipmentInstancesForm(EINames)
+            {
+                X = Cursor.Position.X,
+                Y = Cursor.Position.Y,
+            };
 
             if (form.ShowDialog() == DialogResult.OK)
             {

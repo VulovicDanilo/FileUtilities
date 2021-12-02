@@ -13,11 +13,17 @@ namespace FileUtilities.Forms
     public partial class EquipmentInstancesForm : Form
     {
         public List<string> EINames { get; set; }
+        public  int X { get; set; }
+        public int Y { get; set; }
+
         public EquipmentInstancesForm(List<string> einames)
         {
             InitializeComponent();
             EINames = einames;
             RefreshList();
+            lbxEINames_SelectedValueChanged(this, new EventArgs());
+
+            Load += new EventHandler(EquipmentInstancesForm_Load);
         }
 
         private void RefreshList()
@@ -28,7 +34,11 @@ namespace FileUtilities.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            AddEditEquipmentInstanceForm form = new AddEditEquipmentInstanceForm();
+            AddEditEquipmentInstanceForm form = new AddEditEquipmentInstanceForm()
+            {
+                X = Cursor.Position.X,
+                Y = Cursor.Position.Y,
+            };
 
             if (form.ShowDialog() == DialogResult.OK)
             {
@@ -45,7 +55,11 @@ namespace FileUtilities.Forms
         private void btnEdit_Click(object sender, EventArgs e)
         {
             var index = lbxEINames.SelectedIndex;
-            AddEditEquipmentInstanceForm form = new AddEditEquipmentInstanceForm(EINames.ElementAt(index));
+            AddEditEquipmentInstanceForm form = new AddEditEquipmentInstanceForm(EINames.ElementAt(index))
+            {
+                X = Cursor.Position.X,
+                Y = Cursor.Position.Y,
+            };
 
             if (form.ShowDialog() == DialogResult.OK)
             {
@@ -80,6 +94,11 @@ namespace FileUtilities.Forms
                 EINames.RemoveAt(index);
             }
             RefreshList();
+        }
+
+        private void EquipmentInstancesForm_Load(object sender, EventArgs e)
+        {
+            this.SetDesktopLocation(X, Y);
         }
     }
 }

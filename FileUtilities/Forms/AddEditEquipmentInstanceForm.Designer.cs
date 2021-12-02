@@ -88,6 +88,7 @@ namespace FileUtilities.Forms
             this.MinimizeBox = false;
             this.Name = "AddEditEquipmentInstanceForm";
             this.Text = "Equipment instance form";
+            this.Load += new System.EventHandler(this.AddEditEquipmentInstanceForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

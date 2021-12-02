@@ -115,6 +115,7 @@ namespace FileUtilities.Forms
             this.MinimizeBox = false;
             this.Name = "EquipmentInstancesForm";
             this.Text = "EquipmentInstancesForm";
+            this.Load += new System.EventHandler(this.EquipmentInstancesForm_Load);
             this.ResumeLayout(false);
 
         }
