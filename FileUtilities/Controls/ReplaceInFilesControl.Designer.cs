@@ -29,6 +29,7 @@ namespace FileUtilities.Controls
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReplaceInFilesControl));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -42,6 +43,7 @@ namespace FileUtilities.Controls
             this.btnFindAll = new System.Windows.Forms.Button();
             this.btnReplaceInFiles = new System.Windows.Forms.Button();
             this.btnDirectory = new System.Windows.Forms.Button();
+            this.btnFolderFilter = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -76,15 +78,15 @@ namespace FileUtilities.Controls
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(44, 113);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(37, 13);
+            this.label4.Size = new System.Drawing.Size(53, 13);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Filters:";
+            this.label4.Text = "File filters:";
             // 
             // tbxDirectory
             // 
             this.tbxDirectory.Location = new System.Drawing.Point(126, 19);
             this.tbxDirectory.Name = "tbxDirectory";
-            this.tbxDirectory.Size = new System.Drawing.Size(699, 20);
+            this.tbxDirectory.Size = new System.Drawing.Size(666, 20);
             this.tbxDirectory.TabIndex = 4;
             // 
             // tbxFindWhat
@@ -152,7 +154,7 @@ namespace FileUtilities.Controls
             // 
             // btnDirectory
             // 
-            this.btnDirectory.Location = new System.Drawing.Point(831, 19);
+            this.btnDirectory.Location = new System.Drawing.Point(798, 19);
             this.btnDirectory.Name = "btnDirectory";
             this.btnDirectory.Size = new System.Drawing.Size(27, 20);
             this.btnDirectory.TabIndex = 5;
@@ -160,10 +162,22 @@ namespace FileUtilities.Controls
             this.btnDirectory.UseVisualStyleBackColor = true;
             this.btnDirectory.Click += new System.EventHandler(this.btnDirectory_Click);
             // 
+            // btnFolderFilter
+            // 
+            this.btnFolderFilter.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFolderFilter.BackgroundImage")));
+            this.btnFolderFilter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnFolderFilter.Location = new System.Drawing.Point(831, 19);
+            this.btnFolderFilter.Name = "btnFolderFilter";
+            this.btnFolderFilter.Size = new System.Drawing.Size(27, 20);
+            this.btnFolderFilter.TabIndex = 13;
+            this.btnFolderFilter.UseVisualStyleBackColor = true;
+            this.btnFolderFilter.Click += new System.EventHandler(this.btnFolderFilter_Click);
+            // 
             // ReplaceInFilesControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnFolderFilter);
             this.Controls.Add(this.btnDirectory);
             this.Controls.Add(this.btnReplaceInFiles);
             this.Controls.Add(this.btnFindAll);
@@ -199,5 +213,6 @@ namespace FileUtilities.Controls
         private System.Windows.Forms.Button btnFindAll;
         private System.Windows.Forms.Button btnReplaceInFiles;
         private System.Windows.Forms.Button btnDirectory;
+        private System.Windows.Forms.Button btnFolderFilter;
     }
 }

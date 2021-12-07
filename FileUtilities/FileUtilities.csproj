@@ -65,6 +65,7 @@
     <Compile Include="Controls\ReplaceInFilesControl.Designer.cs">
       <DependentUpon>ReplaceInFilesControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\ListViewExtensions.cs" />
     <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="Extensions\RichTextBoxExtentions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
@@ -85,6 +86,12 @@
     </Compile>
     <Compile Include="Forms\EquipmentInstancesForm.Designer.cs">
       <DependentUpon>EquipmentInstancesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FolderFilterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FolderFilterForm.Designer.cs">
+      <DependentUpon>FolderFilterForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ILog.cs" />
     <Compile Include="Program.cs" />
@@ -109,6 +116,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EquipmentInstancesForm.resx">
       <DependentUpon>EquipmentInstancesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FolderFilterForm.resx">
+      <DependentUpon>FolderFilterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -136,6 +146,7 @@
   <ItemGroup>
     <Content Include="Images\EquipmentInstanceRuntime.ico" />
     <Content Include="Images\EquipmentInstanceRuntime.png" />
+    <Content Include="Images\filter.jpg" />
     <Content Include="Images\wrench.ico" />
     <Content Include="Images\clear.png" />
     <Content Include="Images\replace.png" />

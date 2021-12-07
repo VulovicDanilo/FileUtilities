@@ -131,9 +131,8 @@ namespace FileUtilities.Controls
                     var destinationFile = Path.Combine(directory.FullName, new FileInfo(file).Name);
                     File.Copy(file, destinationFile, cbxOverwrite.Checked);
                 }
-                LogFound.Invoke(this, new LogFoundArgs($"Directory created: \"{directory.FullName}\" ({counter} out of {EINames.Count}).{Environment.NewLine}", Color.Green));
+                LogFound.Invoke(this, new LogFoundArgs($"Directory created: \"{directory.FullName}\" ({++counter} out of {EINames.Count}).{Environment.NewLine}", Color.Green));
                 ScrollToBottom.Invoke(this, new EventArgs());
-                counter++;
                 var percentage = Math.Round((counter * 100.0) / EINames.Count);
                 bgWorker.ReportProgress((int)percentage);
             }

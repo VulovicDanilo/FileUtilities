@@ -28,7 +28,7 @@ namespace FileUtilities.StringSearch
             }
         }
 
-        public List<StringSearchResult> FindString(string directory, string pattern, string allFilters, bool recursively, bool matchCase)
+        public List<StringSearchResult> FindString(string directory, List<string> allowedFolders, string pattern, string allFilters, bool recursively, bool matchCase)
         {
             var searchResults = new List<StringSearchResult>();
             ClearAll();
@@ -36,10 +36,13 @@ namespace FileUtilities.StringSearch
 
             SearchOption searchOption = recursively ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
 
-            string[] filters = allFilters.Split(',');
-            if (filters.Length == 1 && string.IsNullOrEmpty(filters[0]))
+            List<string> filters = allFilters.Split(',').ToList();
+            if (filters.Count == 1 && string.IsNullOrEmpty(filters[0]))
                 filters[0] = "*";
             var allFiles = Directory.GetFiles(directory, "*", searchOption).ToList();
+
+            allFiles = allFiles.Where(x => allowedFolders.Any(folder => x.StartsWith(folder))).ToList();
+
             AllFilesCount = allFiles.Count;
             Filters = filters.ToList();
 

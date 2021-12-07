@@ -1,4 +1,5 @@
 ﻿using FileUtilities.Arguments;
+using FileUtilities.Forms;
 using FileUtilities.StringSearch;
 using System;
 using System.Collections.Generic;
@@ -17,16 +18,20 @@ namespace FileUtilities.Controls
     public partial class ReplaceInFilesControl : UserControl, ILog
     {
         public StringSearcher StringSearcher { get; set; }
+        public List<string> AllowedFolders { get; set; }
+
         public event EventHandler<string> LogInfo;
         public event EventHandler<string> LogWarn;
         public event EventHandler<LogFoundArgs> LogFound;
         public event EventHandler RememberScrollLocation;
         public event EventHandler ScrollToStart;
         public event EventHandler ScrollToBottom;
+
         public ReplaceInFilesControl()
         {
             InitializeComponent();
             StringSearcher = new StringSearcher();
+            AllowedFolders = new List<string>();
         }
 
         private void btnDirectory_Click(object sender, EventArgs e)
@@ -65,7 +70,7 @@ namespace FileUtilities.Controls
 
             RememberScrollLocation.Invoke(this, new EventArgs());
 
-            var searchResults = StringSearcher.FindString(directory, findWhat, filters, recursively, matchCase);
+            var searchResults = StringSearcher.FindString(directory, AllowedFolders, findWhat, filters, recursively, matchCase);
 
             LogInfo.Invoke(this, $"Total files count: {StringSearcher.AllFilesCount}{Environment.NewLine}");
             LogInfo.Invoke(this, $"Filters: {string.Join(", ", StringSearcher.Filters)}{Environment.NewLine}");
@@ -115,7 +120,7 @@ namespace FileUtilities.Controls
 
             RememberScrollLocation.Invoke(this, new EventArgs());
 
-            var searchResults = StringSearcher.FindString(directory, findWhat, filters, recursively, matchCase);
+            var searchResults = StringSearcher.FindString(directory, AllowedFolders, findWhat, filters, recursively, matchCase);
             int occurencesReplaced = 0;
 
             foreach (var searchGroup in searchResults.GroupBy(x => x.File))
@@ -134,6 +139,28 @@ namespace FileUtilities.Controls
             LogInfo.Invoke(this, $"Replaced {occurencesReplaced} out of {searchResults.Count} occurences.{Environment.NewLine}");
 
             ScrollToStart.Invoke(this, new EventArgs());
+        }
+
+        private void btnFolderFilter_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(tbxDirectory.Text))
+            {
+                LogWarn.Invoke(this, $"Directory is not specified.");
+                return;
+            }
+
+            var directories = Directory.GetDirectories(tbxDirectory.Text).ToList();
+            var allowedFoldersParam = new List<bool>();
+            foreach (var directory in directories)
+            {
+                allowedFoldersParam.Add(AllowedFolders.Contains(directory));
+            }
+            FolderFilterForm form = new FolderFilterForm(directories, allowedFoldersParam);
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                AllowedFolders = form.CheckedFolders;
+            }
         }
     }
 }
